@@ -17,7 +17,7 @@ This is a community port of David's plugin, updated to work with Blender 4.x API
 
 ## Known Issues
 
-- **Animations do not work** — animated data imports but animations are not properly merged/combined.骨ные анимации не склеиваются при импорте.
+- **Animations do not work** — animated data imports but animations are not properly merged/combined.
 - This is a work-in-progress port; please report any issues.
 
 ## Installation
