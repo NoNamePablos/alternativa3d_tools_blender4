@@ -16,8 +16,21 @@ from struct import unpack, pack, calcsize
 from math import atan, atan2
 from mathutils import Vector, Matrix, Quaternion
 from bpy_extras.io_utils import path_reference,path_reference_copy
-from bpy_extras.image_utils import load_image
+from bpy_extras.image_utils import load_image as _load_image_original
 from bpy.props import *
+
+def load_image(imagepath, dirname='', **kwargs):
+	"""Wrapper around load_image that also searches in 'Images/' subdirectory."""
+	result = _load_image_original(imagepath, dirname, **kwargs)
+	if result is not None:
+		return result
+	for subdir in ('Images', 'images'):
+		images_subdir = os.path.join(dirname, subdir)
+		if os.path.isdir(images_subdir):
+			result = _load_image_original(imagepath, images_subdir, **kwargs)
+			if result is not None:
+				return result
+	return None
 
 #==================================
 # Node-based material helpers (Blender 4.x)
